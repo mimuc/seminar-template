@@ -1,1 +1,1 @@
-# seminar-template
+# Seminar Template
