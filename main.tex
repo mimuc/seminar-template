@@ -1,6 +1,6 @@
 % Use the content.tex file to enter your content.
 
-\documentclass[sigconf, nonacm, screen=True, review=True, anonymous=False, authordraft=False]{acmart}
+\documentclass[sigconf, nonacm, screen=True, review=False, anonymous=False, authordraft=False]{acmart}
 
 %%% START ADDITIONAL PACKAGES AND COMMANDS %%% 
 \renewcommand{\sectionautorefname}{Section}
@@ -10,24 +10,20 @@
 \usepackage[yyyymmdd]{datetime}
 \renewcommand{\dateseparator}{--}
 
+% \usepackage{enumitem}
 \usepackage{tabularx}
 \usepackage{dcolumn} %Aligning numbers by decimal points in table columns
 \newcolumntype{d}[1]{D{.}{.}{#1}}
 
 \usepackage{subcaption}
 
-\usepackage{todonotes}
-\let\xtodo\todo
-\renewcommand{\todo}[1]{\xtodo[inline,color=green!50]{#1}}
-\newcommand{\itodo}[1]{\xtodo[inline]{#1}}
-\newcommand{\red}[1]{\textcolor{red}{#1}}
+\definecolor{lightgrey}{rgb}{0.925, 0.925, 0.925}
+\newcommand{\todo}[1]{\texttt{\colorbox{lightgrey}{\textcolor{red}{TODO: #1}}}\newline}
+\newcommand{\itodo}[1]{\texttt{\colorbox{lightgrey}{\textcolor{red}{TODO: #1}}}}
 %%% END ADDITIONAL PACKAGES AND COMMANDS %%% 
 
-
 \newcommand{\charactercount}[1]{
-\immediate\write18{
-    expr `texcount -1 -sum -merge #1.tex` + `texcount -1 -sum -merge -char-only #1.tex` - 1 
-    > chars.txt
+    \immediate\write18{expr `texcount -1 -sum -merge #1.tex` + `texcount -1 -sum -merge -char #1.tex` - 1 > chars.txt
 }\input{chars.txt}}
 
 
@@ -53,22 +49,22 @@
 \author{Your Name}
 \orcid{0000-0000-0000-0000} % get your own ORCID via https://orcid.org/
 \affiliation{%
-  \institution{LMU Munich}
-  \city{Munich}
-  \postcode{80337}
-  \country{Germany}}
-\email{your.name@campus.lmu.de}
+  \institution{Your University}
+  \city{Your City}
+  \country{Your Country}}
+\email{your.name@your.university}
 
 %%
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
 % Enter your abstract here, we advise following the structure given:
+% You might want to take inspiration from a structured abstract, see https://www.nlm.nih.gov/bsd/policy/structured_abstracts.html
 \todo{What is the specific problem addressed?}
 \todo{What have you done?}
 \todo{What did you find out?}
 \todo{What are the implications on a larger scale?}
-\todo{Note: aim for 150 words}
+\todo{Note: aim for max 150 words}
 \end{abstract}
 
 %%
@@ -115,7 +111,7 @@
 \bibliography{bibliography}
 
 \appendix
-\section{Character Count}
-This work contains \charactercount{content} characters.
+\section*{Character Count}
+This work contains \charactercount{content} characters (without spaces).
 %TC:endignore
 \end{document}
